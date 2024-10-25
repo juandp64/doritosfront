@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/user.css'; // Usaremos el mismo archivo CSS que en el componente User.jsx
+import '../styles/user.css';
 
 export default function Admin() {
-  // Datos de ejemplo para los ganadores
-  const ganadores = [
-    { fecha: '2024-10-20 15:34', nombre: 'Juan Pérez', cedula: '123456789', celular: '987654321', codigo: '123', premio: 'Premio 1' },
-    { fecha: '2024-10-21 09:12', nombre: 'Ana López', cedula: '987654321', celular: '123456789', codigo: '456', premio: 'Premio 2' },
-    // Más ganadores aquí
-  ];
+  const [ganadores, setGanadores] = useState([]);
+
+  useEffect(() => {
+    const obtenerGanadores = async () => {
+      const response = await fetch('https://doritosback.vercel.app/api/tablaAdmin');
+      const data = await response.json();
+      setGanadores(data.ganadores);
+    };
+
+    obtenerGanadores();
+  }, []);
 
   return (
     <>

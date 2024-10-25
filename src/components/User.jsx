@@ -1,40 +1,41 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/user.css';
 
 export default function User() {
   const [codigo, setCodigo] = useState('');
   const [codigosIngresados, setCodigosIngresados] = useState([]);
-  const premios = {
-    "123": "Premio 1",
-    "456": "Premio 2",
-    "789": "Premio 3"
-  };
 
-  const manejarCambioCodigo = (e) => {
-    setCodigo(e.target.value);
-  };
+  useEffect(() => {
+    // Obtener códigos del usuario logueado desde el backend
+    const obtenerCodigos = async () => {
+      const response = await fetch('https://doritosback.vercel.app/api/tablaUser');
+      const data = await response.json();
+      setCodigosIngresados(data.codigos);
+    };
 
-  const registrarCodigo = () => {
+    obtenerCodigos();
+  }, []);
+
+  const registrarCodigo = async () => {
     if (codigo.length === 3) {
-      const premio = premios[codigo] || "No Ganaste";
-      const nuevoCodigo = {
-        codigo,
-        fecha: new Date().toLocaleDateString(),
-        premio
-      };
+      const response = await fetch('https://doritosback.vercel.app/api/registrarCodigo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ codigo })
+      });
+      const data = await response.json();
 
-      setCodigosIngresados([...codigosIngresados, nuevoCodigo]);
-
-      if (premios[codigo]) {
-        alert(`Felicidades, has ganado: ${premios[codigo]}`);
+      if (data.success) {
+        setCodigosIngresados([...codigosIngresados, data.codigo]);
+        alert(data.mensaje);
       } else {
-        alert("No Ganaste");
+        alert('Error al registrar código');
       }
 
       setCodigo('');
     } else {
-      alert("Por favor, ingrese un código de 3 dígitos.");
+      alert('Por favor, ingrese un código de 3 dígitos.');
     }
   };
 
