@@ -1,0 +1,85 @@
+/* Centrado con flexbox */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+  margin: 0;
+  background: url('../img/FonDorito.jpg') no-repeat center center !important;
+  background-size: cover !important; /* Ajusta el tamaño para que la imagen quepa dentro sin distorsionarse */
+  background-attachment: fixed; /* La imagen se mantiene fija mientras se hace scroll */
+  background-color: #000; /* Agrega un color de fondo en caso de que la imagen no cubra todo */
+  font-family: Arial, sans-serif;
+}
+
+/* Contenedor del login */
+.login-container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.login-logo {
+  width: 130px; /* Ajusta el tamaño según tu preferencia */
+  height: auto;
+}
+
+.login-container h2 {
+  text-align: center;
+  color: rgb(255, 255, 255); /* Color del h2 */
+  margin-bottom: 20px;  
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.form-control::placeholder {
+  color: #fff;
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: rgb(255, 115, 0) !important; /* Mismo color que el h2 */
+  border-color: rgb(255, 115, 0) !important; /* Mismo color que el h2 */
+  font-size: 16px !important; /* Tamaño de fuente ajustado */
+  padding: 10px !important; /* Ajuste para dar más espacio interno */
+  white-space: nowrap; /* Previene que el texto se divida en dos líneas */
+  min-width: 150px;
+}
+
+.btn-primary:hover {
+  background-color: rgba(255, 115, 0, 0.8)!important; /* Un poco más oscuro al hacer hover */
+  border-color: rgba(255, 115, 0, 0.8) !important;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.register-link a {
+  color: rgb(255, 115, 0); /* Mismo color del botón y h2 */
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
